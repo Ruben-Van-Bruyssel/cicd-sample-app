@@ -1,13 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-mkdir tempdir
-mkdir tempdir/templates
-mkdir tempdir/static
+mkdir -p tempdir/templates
+mkdir -p tempdir/static
 
 cp sample_app.py tempdir/.
-cp -r templates/* tempdir/templates/.
-cp -r static/* tempdir/static/.
+cp -r templates/* tempdir/templates/ || true
+cp -r static/* tempdir/static/ || true
 
 cat > tempdir/Dockerfile << _EOF_
 FROM python
@@ -22,4 +21,5 @@ _EOF_
 cd tempdir || exit
 docker build -t sampleapp .
 docker run -t -d -p 5050:5050 --name samplerunning sampleapp
-docker ps -a 
+docker ps -a
+
