@@ -6,7 +6,7 @@ node {
         }
     }
     stage('Build') {
-        build 'BuildSampleApp_Ruben'
+        build 'SampleAppPipeline'
     }
     stage('Results') {
         build 'TestSampleApp'
